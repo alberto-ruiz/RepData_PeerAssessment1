@@ -46,16 +46,11 @@ For the first part of the project missing values were removed. The histogram, th
 ```r
 base <- na.omit(base)  # Quitando valores perdidos
 numstepsday <- tapply(base$steps, base$date, sum)  # Calculando numero de pasos por dia
-png(filename = "hist1.png")
 hist(numstepsday, col = "cornflowerblue", main = "Numero de pasos por dia", 
     xlab = "Cantidad de pasos")  # Histograma
-dev.off()
 ```
 
-```
-## pdf 
-##   2
-```
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
 
 ```r
 mean(numstepsday, na.rm = T)  #Calculo de la media
@@ -93,16 +88,11 @@ Ranges between 50 and 250 is increased when activity is reaching its highest poi
 
 ```r
 numstepsint <- tapply(base$steps, base$interval, mean)  # Calculando promedio de pasos en cada intervalo de tiempo por dia
-png(filename = "plot1.png")
 plot(numstepsint, type = "l", col = "dodgerblue2", xlab = "Intervalo", ylab = "Pasos", 
     main = "Numero de pasos promedio\n durante el dia")
-dev.off()
 ```
 
-```
-## pdf 
-##   2
-```
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
 
 ```r
 names(which.max(numstepsint))
@@ -149,7 +139,7 @@ system.time(for (i in 1:nrow(base2)) {
 
 ```
 ##    user  system elapsed 
-##  386.15    0.03  387.17
+##   386.7     0.0   387.4
 ```
 
 ```r
@@ -163,16 +153,11 @@ With this new basis the number of steps per day was calculated and the histogram
 
 ```r
 numstepsdayimp <- tapply(base2$steps, base2$date, sum)  # Calculando numero de pasos por dia
-png(filename = "hist2.png")
 hist(numstepsdayimp, col = "cornflowerblue", main = "Numero de pasos por dia", 
     xlab = "Cantidad de pasos")  # Histograma
-dev.off()
 ```
 
-```
-## pdf 
-##   2
-```
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
 
 ```r
 mean(numstepsdayimp)  #Calculo de la media
@@ -221,25 +206,20 @@ system.time(for (i in 1:nrow(base2)) {
 
 ```
 ##    user  system elapsed 
-##  123.66    0.01  123.95
+##   95.64    0.00   95.77
 ```
 
 ```r
 names(base2)[6] <- "weekday"
 base2[, 6] <- factor(base2[, 6])
 numstepsweek <- tapply(base2$steps, list(base2$interval, base2$weekday), mean)  # Calculando numero de pasos por dia
-png(filename = "plot2.png")
 par(mfrow = c(2, 1))
 plot(numstepsweek[, 1], type = "l", col = "dodgerblue2", xlab = "Intervalo", 
     ylab = "Pasos", main = "Numero de pasos promedio durante el dia\n\n         Weekday")
 plot(numstepsweek[, 2], type = "l", col = "dodgerblue2", xlab = "Intervalo", 
     ylab = "Pasos", main = "Numero de pasos promedio durante el dia\n\n         Weekend")
-dev.off()
 ```
 
-```
-## pdf 
-##   2
-```
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
 
 

@@ -34,9 +34,7 @@ For the first part of the project missing values were removed. The histogram, th
 ```{r, echo=TRUE}
 base<-na.omit(base)   # Quitando valores perdidos
 numstepsday<-tapply(base$steps,base$date,sum)   # Calculando numero de pasos por dia
-png(filename = "hist1.png")
 hist(numstepsday,col='cornflowerblue',main='Numero de pasos por dia',xlab='Cantidad de pasos')  # Histograma
-dev.off()
 mean(numstepsday,na.rm=T)   #Calculo de la media
 median(numstepsday,na.rm=T)   #Calculo de la mediana
 summary(numstepsday)[3:4]    #Calculo de la media y la mediana
@@ -51,10 +49,8 @@ Ranges between 50 and 250 is increased when activity is reaching its highest poi
 
 ```{r,echo=TRUE}
 numstepsint<-tapply(base$steps,base$interval,mean)   # Calculando promedio de pasos en cada intervalo de tiempo por dia
-png(filename = "plot1.png")
 plot(numstepsint,type='l',col='dodgerblue2',
      xlab='Intervalo',ylab='Pasos',main='Numero de pasos promedio\n durante el dia')
-dev.off()
 names(which.max(numstepsint));max(numstepsint)
 ```
 
@@ -81,9 +77,7 @@ With this new basis the number of steps per day was calculated and the histogram
 
 ```{r,echo=TRUE}
 numstepsdayimp<-tapply(base2$steps,base2$date,sum)   # Calculando numero de pasos por dia
-png(filename = "hist2.png")
 hist(numstepsdayimp,col='cornflowerblue',main='Numero de pasos por dia',xlab='Cantidad de pasos')  # Histograma
-dev.off()
 mean(numstepsdayimp)   #Calculo de la media
 median(numstepsdayimp)   #Calculo de la mediana
 summary(numstepsdayimp)[3:4]    #Calculo de la media y la mediana
@@ -110,7 +104,6 @@ system.time(
 names(base2)[6]<-'weekday'
 base2[,6]<-factor(base2[,6])
 numstepsweek<-tapply(base2$steps,list(base2$interval,base2$weekday),mean)   # Calculando numero de pasos por dia
-png(filename = "plot2.png")
   par(mfrow=c(2,1))
     plot(numstepsweek[,1],type='l',col='dodgerblue2',
          xlab='Intervalo',ylab='Pasos',main='Numero de pasos promedio durante el dia\n
@@ -118,6 +111,5 @@ png(filename = "plot2.png")
     plot(numstepsweek[,2],type='l',col='dodgerblue2',
          xlab='Intervalo',ylab='Pasos',main='Numero de pasos promedio durante el dia\n
          Weekend')
-dev.off()
 ```
 
